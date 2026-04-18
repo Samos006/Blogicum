@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container py-5">
+    <h1>Подтверждение удаления</h1>
+    <p>Вы уверены, что хотите удалить
+        {% if object.title %}
+        пост "{{ object.title }}"
+        {% else %}
+        этот комментарий
+        {% endif %}?
+    </p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Удалить</button>
+        <a href="
+        {% if object.post %}
+          {% url 'blog:post_detail' object.post.id %}
+        {% else %}
+          {% url 'blog:post_detail' object.id %}
+        {% endif %}" class="btn btn-secondary">Отмена</a>
+    </form>
+</div>
+{% endblock %}
